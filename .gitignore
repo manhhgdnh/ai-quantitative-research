@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+# Do not publish third-party downloaded market data by default
+data/
+# Generated model reports, research artifacts and large fitted weights
+reports/

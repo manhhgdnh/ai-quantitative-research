@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-driven-quant-trading"
+version = "0.4.0"
+description = "Leakage-aware SPY forecasting, long/cash backtesting and strategy robustness"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26,<3",
+    "pandas>=2.1,<4",
+    "yfinance>=0.2.55,<1",
+    "pyarrow>=15,<25",
+    "exchange-calendars>=4.5,<5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "torch>=2.2,<3"]
+ml = ["scikit-learn>=1.4,<2", "joblib>=1.3,<2", "xgboost>=2.1,<4"]
+dl = ["torch>=2.2,<3"]
+research = ["matplotlib>=3.8,<4", "statsmodels>=0.14,<1", "jupyterlab>=4,<5", "ipykernel>=6,<8", "nbformat>=5,<6"]
+all = ["scikit-learn>=1.4,<2", "joblib>=1.3,<2", "xgboost>=2.1,<4", "matplotlib>=3.8,<4", "statsmodels>=0.14,<1", "jupyterlab>=4,<5", "ipykernel>=6,<8", "nbformat>=5,<6", "pytest>=8,<10", "torch>=2.2,<3"]
+
+[project.scripts]
+quant-phase1 = "quant_trading.pipeline:main"
+quant-phase2-baselines = "quant_trading.phase2_baselines:main"
+quant-phase2-xgboost = "quant_trading.phase2_xgboost:main"
+quant-phase2-robustness = "quant_trading.phase2_robustness:main"
+quant-phase3-mlp = "quant_trading.phase3_mlp:main"
+quant-phase3-lstm = "quant_trading.phase3_lstm:main"
+quant-phase4-backtest = "quant_trading.phase4_backtest:main"
+quant-phase4-robustness = "quant_trading.phase4_robustness:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
